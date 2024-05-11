@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import LoginNav from "./LoginNav";
 import LogoutNav from "./LogoutNav";
 import { AuthContext } from "../AuthProvider";
+import viteImg from "../../public/vite.png";
 
 const Nav = () => {
   const { user, setRouteState } = useContext(AuthContext);
@@ -90,9 +91,10 @@ const Nav = () => {
             to="/"
             className="btn btn-ghost text-2xl text-blue-500 font-bold hidden md:flex"
           >
-            <span className="text-red-500">bi</span>
-            <span className="text-blue-400"> K</span>
-            <span className="text-red-500">olpo</span>
+            <img src={viteImg} className="max-h-10"></img>
+            <span className="text-blue-400">bi</span>
+            <span className="text-red-500">K</span>
+            <span className="text-blue-400">olpo</span>
           </NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
