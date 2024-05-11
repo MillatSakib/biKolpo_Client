@@ -6,11 +6,13 @@ import LayOut from "./LayOut";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import AuthProvider from "./AuthProvider";
+import NotFoundPage from "./ErroPage/NotFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LayOut></LayOut>,
+    errorElement: <NotFoundPage></NotFoundPage>,
   },
 ]);
 
