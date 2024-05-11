@@ -8,6 +8,8 @@ import AllQueries from "./AllQueries/AllQueries";
 import RecomendedForMe from "./RecomendedForMe/RecomendedForMe";
 import MyQueries from "./MyQueris/MyQueries";
 import MyRecomendetion from "./MyRecomendation/MyRecomendetion";
+import PrivateRoutes from "./PrivateRoutes/MainPrivateRoutes";
+import AuthPrivateRoute from "./PrivateRoutes/AuthPrivateRoute";
 
 const AllRoutes = () => {
   const Routes = createBrowserRouter([
@@ -22,11 +24,19 @@ const AllRoutes = () => {
         },
         {
           path: "/login",
-          element: <Login></Login>,
+          element: (
+            <AuthPrivateRoute>
+              <Login></Login>
+            </AuthPrivateRoute>
+          ),
         },
         {
           path: "/register",
-          element: <Register></Register>,
+          element: (
+            <AuthPrivateRoute>
+              <Register></Register>
+            </AuthPrivateRoute>
+          ),
         },
 
         {
@@ -36,17 +46,29 @@ const AllRoutes = () => {
 
         {
           path: "/recomendationsForMe",
-          element: <RecomendedForMe></RecomendedForMe>,
+          element: (
+            <PrivateRoutes>
+              <RecomendedForMe></RecomendedForMe>
+            </PrivateRoutes>
+          ),
         },
 
         {
           path: "/myQueries",
-          element: <MyQueries></MyQueries>,
+          element: (
+            <PrivateRoutes>
+              <MyQueries></MyQueries>
+            </PrivateRoutes>
+          ),
         },
 
         {
           path: "/myRecomendation",
-          element: <MyRecomendetion></MyRecomendetion>,
+          element: (
+            <PrivateRoutes>
+              <MyRecomendetion></MyRecomendetion>
+            </PrivateRoutes>
+          ),
         },
       ],
     },
