@@ -89,12 +89,14 @@ const Nav = () => {
           </div>
           <NavLink
             to="/"
-            className="btn btn-ghost text-2xl text-blue-500 font-bold hidden md:flex"
+            className="btn btn-ghost text-2xl text-blue-500 font-bold flex"
           >
             <img src={viteImg} className="max-h-10"></img>
-            <span className="text-blue-400">bi</span>
-            <span className="text-red-500">K</span>
-            <span className="text-blue-400">olpo</span>
+            <div className="hidden md:block">
+              <span className="text-blue-400">bi</span>
+              <span className="text-red-500">K</span>
+              <span className="text-blue-400">olpo</span>
+            </div>
           </NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
