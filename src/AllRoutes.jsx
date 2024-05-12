@@ -12,6 +12,7 @@ import PrivateRoutes from "./PrivateRoutes/MainPrivateRoutes";
 import AuthPrivateRoute from "./PrivateRoutes/AuthPrivateRoute";
 import AddQueries from "./AddQueries/AddQueries";
 import UpdateQuery from "./UpdateQuery/UpdateQuery";
+import QueryDetails from "./QueryDetails/QueryDetails";
 
 const AllRoutes = () => {
   const Routes = createBrowserRouter([
@@ -85,6 +86,14 @@ const AllRoutes = () => {
           element: (
             <PrivateRoutes>
               <UpdateQuery></UpdateQuery>
+            </PrivateRoutes>
+          ),
+        },
+        {
+          path: "/queryDetails/:id",
+          element: (
+            <PrivateRoutes>
+              <QueryDetails></QueryDetails>
             </PrivateRoutes>
           ),
         },
