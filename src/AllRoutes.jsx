@@ -11,6 +11,7 @@ import MyRecomendetion from "./MyRecomendation/MyRecomendetion";
 import PrivateRoutes from "./PrivateRoutes/MainPrivateRoutes";
 import AuthPrivateRoute from "./PrivateRoutes/AuthPrivateRoute";
 import AddQueries from "./AddQueries/AddQueries";
+import UpdateQuery from "./UpdateQuery/UpdateQuery";
 
 const AllRoutes = () => {
   const Routes = createBrowserRouter([
@@ -76,6 +77,14 @@ const AllRoutes = () => {
           element: (
             <PrivateRoutes>
               <AddQueries></AddQueries>
+            </PrivateRoutes>
+          ),
+        },
+        {
+          path: "/updateQuery/:id",
+          element: (
+            <PrivateRoutes>
+              <UpdateQuery></UpdateQuery>
             </PrivateRoutes>
           ),
         },

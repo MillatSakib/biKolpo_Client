@@ -5,7 +5,7 @@ const OurPartners = () => {
   return (
     <div className="mx-auto w-[95%] md:w-[80%] lg:w-[65%] my-10">
       <h3 className="text-2xl md:text-3xl font-bold text-center my-10">
-        Our Parners
+        Our Partners
       </h3>
       <p className="text-center w-[99%] md:w-[95%] lg:w-[65%] mx-auto">
         At biKolpo, we believe in the strength of partnerships and

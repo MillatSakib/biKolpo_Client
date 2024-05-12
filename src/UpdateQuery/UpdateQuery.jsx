@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider";
 
-const AddQueries = () => {
+const UpdateQuery = () => {
+  const { user } = useContext(AuthContext);
   const handlesubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -19,11 +20,10 @@ const AddQueries = () => {
       currentDateTime,
     };
   };
-  const { user } = useContext(AuthContext);
   return (
     <div className="text-center mb-28">
       <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold my-10">
-        Add Queries
+        Update Queries
       </h2>
       <div className="w-[95%] md:w-[80%] lg:w-[65%] mx-auto">
         <form onSubmit={handlesubmit}>
@@ -137,4 +137,4 @@ const AddQueries = () => {
   );
 };
 
-export default AddQueries;
+export default UpdateQuery;
