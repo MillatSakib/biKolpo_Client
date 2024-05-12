@@ -9,7 +9,6 @@ const Home = () => {
     <div>
       <SwipeBanner></SwipeBanner>
       <div className="my-16">
-        <></>
         <TinyBanner></TinyBanner>
       </div>
       <SomeQueries></SomeQueries>
