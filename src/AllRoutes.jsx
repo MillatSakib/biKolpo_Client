@@ -10,6 +10,7 @@ import MyQueries from "./MyQueris/MyQueries";
 import MyRecomendetion from "./MyRecomendation/MyRecomendetion";
 import PrivateRoutes from "./PrivateRoutes/MainPrivateRoutes";
 import AuthPrivateRoute from "./PrivateRoutes/AuthPrivateRoute";
+import AddQueries from "./AddQueries/AddQueries";
 
 const AllRoutes = () => {
   const Routes = createBrowserRouter([
@@ -67,6 +68,14 @@ const AllRoutes = () => {
           element: (
             <PrivateRoutes>
               <MyRecomendetion></MyRecomendetion>
+            </PrivateRoutes>
+          ),
+        },
+        {
+          path: "/addQueries",
+          element: (
+            <PrivateRoutes>
+              <AddQueries></AddQueries>
             </PrivateRoutes>
           ),
         },
