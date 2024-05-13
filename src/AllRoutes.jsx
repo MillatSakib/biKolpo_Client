@@ -13,6 +13,7 @@ import AuthPrivateRoute from "./PrivateRoutes/AuthPrivateRoute";
 import AddQueries from "./AddQueries/AddQueries";
 import UpdateQuery from "./UpdateQuery/UpdateQuery";
 import QueryDetails from "./QueryDetails/QueryDetails";
+import axios from "axios";
 
 const AllRoutes = () => {
   const Routes = createBrowserRouter([
@@ -91,6 +92,8 @@ const AllRoutes = () => {
         },
         {
           path: "/queryDetails/:id",
+          loader: ({ params }) =>
+            axios.post(`https://bikolpo.vercel.app/queryDetails/${params.id}`),
           element: (
             <PrivateRoutes>
               <QueryDetails></QueryDetails>

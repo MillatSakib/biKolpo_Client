@@ -2,8 +2,26 @@ import { useContext } from "react";
 import { AuthContext } from "../AuthProvider";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useLoaderData } from "react-router-dom";
 
 const QueryDetails = () => {
+  const apiData = useLoaderData();
+  const queryData = apiData.data[0];
+  // console.log(queryData);
+  function formatDate(dateStringInMilliseconds) {
+    const milliseconds = parseInt(dateStringInMilliseconds);
+    const date = new Date(milliseconds);
+    const options = {
+      weekday: "short",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+    return date.toLocaleDateString("en-US", options);
+  }
+  const formattedDate = formatDate(queryData?.currentDateTime);
   const { user } = useContext(AuthContext);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,17 +29,25 @@ const QueryDetails = () => {
     const form = e.target;
     const data = {
       title: form.title.value,
-      productName: form.productName.value,
+      recomendedProductName: form.productName.value,
       productImage: form.productImage.value,
       reason: form.reason.value,
-      userName: user.displayName,
+      recomenderName: user.displayName,
       profileImage: user.photoURL,
       recommernderEmail: user.email,
       currentDateTime,
+      postId: queryData._id,
+      queryTitle: queryData.queryTitle,
+      productName: queryData.ProductName,
+      queryUserName: queryData.name,
+      quryUserEmail: queryData.email,
     };
     // console.log("objectobject");
     axios
-      .post("https://bikolpo.vercel.app/addRecomendation", data)
+      .post(
+        `https://bikolpo.vercel.app/addRecomendation/${queryData._id}`,
+        data
+      )
       .then((res) => {
         form.title.value = "";
         form.productName.value = "";
@@ -41,31 +67,30 @@ const QueryDetails = () => {
   };
   return (
     <div>
-      <img
-        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-        className="w-full"
-      ></img>
+      <img src={queryData.img_url} className="h-[70vh] mx-auto"></img>
       <div className="w-[95%] md:w-[80%] lg:w-[65%] mx-auto my-16">
         <div className="text-xl md:text-2xl lg:text-3xl font-semibold">
-          This is Query Title
+          {queryData.queryTitle}
         </div>
-        <div className="flex justify-between mt-4">
-          <div className="text-xl font-semibold">Product Name</div>
+        <div className="flex justify-between mt-4 flex-col md:flex-row gap-2">
+          <div className="text-xl font-semibold">
+            Product/service Name: {queryData.ProductName}
+          </div>
           <div className="text-xl font-semibold text-orange-500">
-            Brand Name
+            Brand Name: {queryData.ProductBrand}
           </div>
         </div>
-        <p>Here write Alternation Reason</p>
+        <h3 className="text-xl md:text-2xl lg:text-3xl my-6 font-bold text-error">
+          Reason of Boycott
+        </h3>
+        <p className="my-2">{queryData.boycottingReason}</p>
         <div className="flex justify-between mt-4">
-          <div>Posted Date: </div>
-          <div>Total Recomendation: </div>
+          <div>Posted Date: {formattedDate}</div>
+          <div>Total Recomendation: {queryData.recomendationCount}</div>
         </div>
         <div className="my-6">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-            className="rounded-full w-16"
-          ></img>
-          <div>Md. Sohan Millat Sakib</div>
+          <img src={queryData.profilePhoto} className="rounded-full w-16"></img>
+          <div>{queryData.name}</div>
         </div>
 
         <div>
