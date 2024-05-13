@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TableData from "./TableData";
+import { AuthContext } from "../AuthProvider";
 
 const UserRecomendataionTable = () => {
-  const data = [{}, {}];
+  const { user } = useContext(AuthContext);
+  const [data, setData] = useState([]);
+  const [dependency, setDependency] = useState(true);
   const length = data.length;
+  useEffect(() => {
+    fetch(`https://bikolpo.vercel.app/myRecomendetion/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, [dependency]);
   return (
     <>
       {length === 0 ? (
@@ -18,14 +26,19 @@ const UserRecomendataionTable = () => {
                 <tr>
                   <th>Profile</th>
                   <th>Query Title</th>
-                  <th>Product & Brand Name</th>
+                  <th>Product Name or Service</th>
                   <th>Recommendation Reason</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 {data.map((singleData, index) => (
-                  <TableData data={singleData} key={index}></TableData>
+                  <TableData
+                    data={singleData}
+                    dependency={dependency}
+                    setDependency={setDependency}
+                    key={index}
+                  ></TableData>
                 ))}
               </tbody>
             </table>

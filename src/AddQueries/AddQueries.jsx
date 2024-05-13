@@ -37,7 +37,7 @@ const AddQueries = () => {
         });
       })
       .catch((error) => {
-        toast.error(error, {
+        toast.error(error?.response?.data?.error, {
           position: "bottom-right",
         });
       });

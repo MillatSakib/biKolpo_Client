@@ -1,8 +1,20 @@
 import { Link } from "react-router-dom";
 import AddQueryBanner from "./AddQueryBanner";
 import AllMyQuery from "./AllMyQuery";
-let AllQueries = [{}, {}, {}, {}];
+import { useContext, useEffect, useState } from "react";
+import AuthProvider, { AuthContext } from "../AuthProvider";
+
 const MyQueries = () => {
+  const { user } = useContext(AuthContext);
+
+  const [AllQueries, setData] = useState([]);
+  const [dependency, setDependency] = useState(true);
+  useEffect(() => {
+    fetch(`https://bikolpo.vercel.app/myQueries/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, [dependency]);
+
   return (
     <div>
       <AddQueryBanner></AddQueryBanner>
@@ -15,7 +27,11 @@ const MyQueries = () => {
           </Link>
         </div>
       ) : (
-        <AllMyQuery data={AllQueries}></AllMyQuery>
+        <AllMyQuery
+          data={AllQueries}
+          dependency={dependency}
+          setDependency={setDependency}
+        ></AllMyQuery>
       )}
     </div>
   );

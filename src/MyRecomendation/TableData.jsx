@@ -1,4 +1,31 @@
-const TableData = () => {
+import swal from "sweetalert";
+
+const TableData = ({ dependency, setDependency, data }) => {
+  const handleDelete = () => {
+    swal({
+      title: "Are you sure?",
+      text: "If click delete, you will not be able to recover this data again!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        fetch(`https://bikolpo.vercel.app/myRecomendation/${data?._id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then(() => {
+            const temp = dependency;
+            setDependency(!temp);
+            swal("Your Data has been deleted!", {
+              icon: "success",
+            });
+          });
+      } else {
+        swal("Ok, we aren't deleted your Data!");
+      }
+    });
+  };
   return (
     <tr>
       <td>
@@ -6,36 +33,32 @@ const TableData = () => {
           <div className="avatar">
             <div className="mask mask-squircle w-12 h-12">
               <img
-                src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png"
+                src={data.queryPhotoUrl}
                 alt="Avatar Tailwind CSS Component"
               />
             </div>
           </div>
           <div>
-            <div className="font-bold">Poster Name</div>
-            <div className="text-sm opacity-50">Poster Email</div>
+            <div className="font-bold">{data.queryUserName}</div>
+            <div className="text-sm opacity-50">{data.quryUserEmail}</div>
           </div>
         </div>
       </td>
 
-      <td>Here contain the Query Title</td>
+      <td>{data.queryTitle}</td>
       <td>
-        Product Name
+        {data.productName}
         <br />
-        <span className="badge badge-ghost badge-sm">Brand Name</span>
       </td>
 
-      <td className="max-w-[450px] min-w-[300px]">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae
-        necessitatibus, odio omnis porro excepturi illum perferendis quam
-        corporis distinctio similique quae perspiciatis velit corrupti ipsum
-        sequi. Commodi voluptatibus laborum consequuntur libero suscipit,
-        sapiente, molestiae minima sequi incidunt tempora magni. Nulla quisquam
-        ducimus laboriosam maiores cupiditate iure voluptatum blanditiis quaerat
-        consequuntur.
-      </td>
+      <td className="max-w-[450px] min-w-[300px]">{data.reason}</td>
       <th>
-        <button className="btn btn-error text-base-300 btn-xs">Delete</button>
+        <button
+          onClick={handleDelete}
+          className="btn btn-error text-base-300 btn-xs"
+        >
+          Delete
+        </button>
       </th>
     </tr>
   );

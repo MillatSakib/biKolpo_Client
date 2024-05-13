@@ -1,7 +1,12 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider";
+import { useLoaderData } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const UpdateQuery = () => {
+  const updateData = useLoaderData();
+  const data = updateData[0];
   const { user } = useContext(AuthContext);
   const handlesubmit = (e) => {
     e.preventDefault();
@@ -19,6 +24,21 @@ const UpdateQuery = () => {
       recomendationCount: 0,
       currentDateTime,
     };
+
+    axios
+      .put(`https://bikolpo.vercel.app/queryUpdate/${data._id}`, formData)
+      .then((res) => {
+        toast.success(res.data, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+        });
+      })
+      .catch((error) => {
+        toast.error(error.response.data.error, {
+          position: "bottom-right",
+        });
+      });
   };
   return (
     <div className="text-center mb-28">
@@ -37,6 +57,7 @@ const UpdateQuery = () => {
                 name="ProductName"
                 type="text"
                 placeholder="Product Name"
+                defaultValue={data.ProductName}
                 className="input input-bordered w-full max-w-xs text-base-content bg-base-100"
               />
             </label>
@@ -49,6 +70,7 @@ const UpdateQuery = () => {
                 name="ProductBrand"
                 type="text"
                 placeholder="Product Brand"
+                defaultValue={data.ProductName}
                 className="input input-bordered w-full max-w-xs text-base-content bg-base-100"
               />
             </label>
@@ -63,6 +85,7 @@ const UpdateQuery = () => {
                 type="text"
                 required
                 name="queryTitle"
+                defaultValue={data.queryTitle}
                 placeholder=" Ex: Is there any Better product that gives me the same quality?"
                 className="input input-bordered w-full max-w-xs text-base-content bg-base-100"
               />
@@ -77,6 +100,7 @@ const UpdateQuery = () => {
                 name="img_url"
                 type="text"
                 placeholder="Product Image URL"
+                defaultValue={data.img_url}
                 className="input input-bordered w-full max-w-xs text-base-content bg-base-100"
               />
             </label>
@@ -119,6 +143,7 @@ const UpdateQuery = () => {
               <textarea
                 required
                 name="boycottingReason"
+                defaultValue={data.boycottingReason}
                 placeholder="Write here  Boycotting Reason Details..."
                 className="textarea textarea-bordered textarea-lg w-full text-base-content bg-base-100"
               ></textarea>
@@ -127,8 +152,8 @@ const UpdateQuery = () => {
           <div className="my-4  max-w-[700px] mx-auto">
             <input
               type="submit"
-              className="btn btn-success text-white w-full"
-              value="Add"
+              className="btn btn-success text-base-300 w-full"
+              value="Update"
             ></input>
           </div>
         </form>

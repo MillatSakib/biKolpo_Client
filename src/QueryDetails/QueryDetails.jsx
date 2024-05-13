@@ -7,7 +7,7 @@ import { useLoaderData } from "react-router-dom";
 const QueryDetails = () => {
   const apiData = useLoaderData();
   const queryData = apiData.data[0];
-  // console.log(queryData);
+  console.log(queryData);
   function formatDate(dateStringInMilliseconds) {
     const milliseconds = parseInt(dateStringInMilliseconds);
     const date = new Date(milliseconds);
@@ -33,7 +33,8 @@ const QueryDetails = () => {
       productImage: form.productImage.value,
       reason: form.reason.value,
       recomenderName: user.displayName,
-      profileImage: user.photoURL,
+      recomender_profileImage: user.photoURL,
+      queryPhotoUrl: queryData.profilePhoto,
       recommernderEmail: user.email,
       currentDateTime,
       postId: queryData._id,

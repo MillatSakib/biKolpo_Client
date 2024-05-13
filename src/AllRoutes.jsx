@@ -84,6 +84,8 @@ const AllRoutes = () => {
         },
         {
           path: "/updateQuery/:id",
+          loader: ({ params }) =>
+            fetch(`https://bikolpo.vercel.app/updateQuery/${params.id}`),
           element: (
             <PrivateRoutes>
               <UpdateQuery></UpdateQuery>
