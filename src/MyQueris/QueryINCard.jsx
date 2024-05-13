@@ -29,7 +29,9 @@ const QueryINCard = () => {
             </button>
           </div>
           <div className="text-center">
-            <button className="btn w-full btn-info">View Details</button>
+            <Link to="../queryDetails/id" className="btn w-full btn-info">
+              View Details
+            </Link>
           </div>
         </div>
       </div>
