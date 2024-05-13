@@ -1,7 +1,14 @@
+import { useContext, useEffect, useState } from "react";
 import RecomendationForMeTable from "./RecomendationForMeTable";
+import { AuthContext } from "../AuthProvider";
 const RecomendedForMe = () => {
-  const data = [{}];
-
+  const [data, setData] = useState([]);
+  const { user } = useContext(AuthContext);
+  useEffect(() => {
+    fetch(`https://bikolpo.vercel.app/recomendationForMe/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
   return (
     <div>
       <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center my-4">
@@ -27,7 +34,10 @@ const RecomendedForMe = () => {
               </thead>
               <tbody>
                 {data.map((singleData, index) => (
-                  <RecomendationForMeTable></RecomendationForMeTable>
+                  <RecomendationForMeTable
+                    data={singleData}
+                    key={index}
+                  ></RecomendationForMeTable>
                 ))}
               </tbody>
             </table>
