@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const QueryDetails = () => {
   const { user } = useContext(AuthContext);
@@ -17,7 +19,25 @@ const QueryDetails = () => {
       recommernderEmail: user.email,
       currentDateTime,
     };
-    console.log(data);
+    // console.log("objectobject");
+    axios
+      .post("https://bikolpo.vercel.app/addRecomendation", data)
+      .then((res) => {
+        form.title.value = "";
+        form.productName.value = "";
+        form.productImage.value = "";
+        form.reason.value = "";
+        toast.success(res.data, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+        });
+      })
+      .catch((error) => {
+        toast.error(error?.response?.statusText, {
+          position: "bottom-right",
+        });
+      });
   };
   return (
     <div>
@@ -51,7 +71,7 @@ const QueryDetails = () => {
         <div>
           <form onSubmit={handleSubmit}>
             <h3 className="text-center font-bold text-xl md:text-2xl lg:text-3xl my-4">
-              Give Recomendation
+              Give A Recomendation
             </h3>
             <div className="flex gap-4 justify-center">
               <label className="form-control w-full max-w-xs">

@@ -1,7 +1,13 @@
+import { useEffect, useState } from "react";
 import QueirisCard from "./QueirisCard";
 
 const AllQueries = () => {
-  const data = [{}, {}, {}];
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch("https://bikolpo.vercel.app/allQeuries")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
   return (
     <div>
       <h2 className="text-center text-2xl md:text-3xl lg:text-4xl font-bold">

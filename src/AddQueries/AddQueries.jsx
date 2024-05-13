@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const AddQueries = () => {
   const handlesubmit = (e) => {
@@ -18,7 +20,29 @@ const AddQueries = () => {
       recomendationCount: 0,
       currentDateTime,
     };
+
+    axios
+      .post("https://bikolpo.vercel.app/addQueries", formData)
+      .then((res) => {
+        form.ProductName.value = "";
+        form.ProductBrand.value = "";
+        form.queryTitle.value = "";
+        form.img_url.value = "";
+        form.boycottingReason.value = "";
+        // console.log(res.data);
+        toast.success(res.data, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+        });
+      })
+      .catch((error) => {
+        toast.error(error, {
+          position: "bottom-right",
+        });
+      });
   };
+
   const { user } = useContext(AuthContext);
   return (
     <div className="text-center mb-28">
