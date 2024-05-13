@@ -29,7 +29,7 @@ const QueirisCard = ({ data }) => {
           <div className="card-actions justify-between items-center">
             <div className="flex flex-col gap-1">
               <span>{formattedDate}</span>
-              <span>{data?.recomendationCount}</span>
+              <span>Total Recomendation: {data?.recomendationCount}</span>
             </div>
 
             <div className="flex items-end flex-col gap-2">

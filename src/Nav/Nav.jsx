@@ -58,15 +58,7 @@ const Nav = () => {
                   Queries
                 </NavLink>
               </li>
-              <li className={user ? "" : "hidden"}>
-                <NavLink
-                  to="/recomendationsForMe"
-                  className="font-semibold text-base-content"
-                  onClick={() => setRouteState("/recomendationsForMe")}
-                >
-                  Recomendations For Me
-                </NavLink>
-              </li>
+
               <li className={user ? "" : "hidden"}>
                 <NavLink
                   to="/myQueries"
@@ -83,6 +75,15 @@ const Nav = () => {
                   onClick={() => setRouteState("/myRecomendation")}
                 >
                   My Recomendation
+                </NavLink>
+              </li>
+              <li className={user ? "" : "hidden"}>
+                <NavLink
+                  to="/recomendationsForMe"
+                  className="font-semibold text-base-content"
+                  onClick={() => setRouteState("/recomendationsForMe")}
+                >
+                  Recomendations For Me
                 </NavLink>
               </li>
             </ul>
@@ -119,15 +120,7 @@ const Nav = () => {
                 Queries
               </NavLink>
             </li>
-            <li className={user ? "" : "hidden"}>
-              <NavLink
-                to="/recomendationsForMe"
-                className="font-semibold text-base-content"
-                onClick={() => setRouteState("/recomendationsForMe")}
-              >
-                Recomendations For Me
-              </NavLink>
-            </li>
+
             <li className={user ? "" : "hidden"}>
               <NavLink
                 to="/myQueries"
@@ -144,6 +137,15 @@ const Nav = () => {
                 onClick={() => setRouteState("/myRecomendation")}
               >
                 My Recomendation
+              </NavLink>
+            </li>
+            <li className={user ? "" : "hidden"}>
+              <NavLink
+                to="/recomendationsForMe"
+                className="font-semibold text-base-content"
+                onClick={() => setRouteState("/recomendationsForMe")}
+              >
+                Recomendations For Me
               </NavLink>
             </li>
           </ul>
