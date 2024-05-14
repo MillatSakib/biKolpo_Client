@@ -1,20 +1,52 @@
 import { useEffect, useState } from "react";
 import QueirisCard from "./QueirisCard";
+import { IoSearch } from "react-icons/io5";
 
 const AllQueries = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchText, setSearchText] = useState("");
   useEffect(() => {
     fetch("https://bikolpo.vercel.app/allQeuries")
       .then((res) => res.json())
       .then((data) => {
-        const temp = loading;
-        setLoading(!temp);
+        setLoading(false);
         setData(data);
       });
   }, []);
+  const handleSearchClick = () => {
+    setLoading(true);
+
+    fetch(`https://bikolpo.vercel.app/allQueries/${searchText}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setLoading(false);
+        setData(data);
+      });
+  };
+
   return (
     <div>
+      <label className="relative flex justify-end my-6 mx-10">
+        <input
+          type="text"
+          className="input input-bordered input-info w-full max-w-xs focus:outline-none"
+          placeholder="Search"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearchClick();
+            }
+          }}
+        />
+        <span
+          className="badge badge-info absolute right-0 h-full rounded hover:cursor-pointer"
+          onClick={handleSearchClick}
+        >
+          <IoSearch />
+        </span>
+      </label>
       <h2 className="text-center text-2xl md:text-3xl lg:text-4xl font-bold">
         All Queries
       </h2>
