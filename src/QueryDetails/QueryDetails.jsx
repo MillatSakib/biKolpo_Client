@@ -81,7 +81,12 @@ const QueryDetails = () => {
   return (
     <div>
       <img src={queryData.img_url} className="h-[70vh] mx-auto"></img>
+
       <div className="w-[95%] md:w-[80%] lg:w-[65%] mx-auto my-16">
+        <div className="mt-12">
+          <img src={queryData.profilePhoto} className="rounded-full w-16"></img>
+          <div>{queryData.name}</div>
+        </div>
         <div className="text-xl md:text-2xl lg:text-3xl font-semibold">
           {queryData.queryTitle}
         </div>
@@ -101,12 +106,8 @@ const QueryDetails = () => {
           <div>Posted Date: {formattedDate}</div>
           <div>Total Recomendation: {queryData.recomendationCount}</div>
         </div>
-        <div className="my-6">
-          <img src={queryData.profilePhoto} className="rounded-full w-16"></img>
-          <div>{queryData.name}</div>
-        </div>
 
-        <div>
+        <div className="mt-20">
           <form onSubmit={handleSubmit}>
             <h3 className="text-center font-bold text-xl md:text-2xl lg:text-3xl my-4">
               Give A Recomendation

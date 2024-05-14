@@ -4,12 +4,12 @@ const RecomendationHero = ({ data }) => {
   console.log(data);
   return (
     <div className="hero bg-base-200">
-      <div className="flex justify-start items-start max-w-[80rem] gap-4 p-4 flex-col lg:flex-row">
+      <div className="flex justify-start items-start gap-4 p-4 flex-col lg:flex-row">
         <img
           src={data.productImage}
-          className="max-w-[300px] rounded-lg shadow-2xl"
+          className="w-full md:max-w-[300px] rounded-lg shadow-2xl"
         />
-        <div>
+        <div className="w-full">
           <div className="my-6">
             <img
               src={data.recomender_profileImage}

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import AddQueryBanner from "./AddQueryBanner";
 import AllMyQuery from "./AllMyQuery";
 import { useContext, useEffect, useState } from "react";
-import AuthProvider, { AuthContext } from "../AuthProvider";
+import { AuthContext } from "../AuthProvider";
 
 const MyQueries = () => {
   const { user } = useContext(AuthContext);

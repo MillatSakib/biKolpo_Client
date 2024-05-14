@@ -44,9 +44,9 @@ const QueryINCard = ({ data, setDependency, dependency }) => {
   const formattedDate = formatDate(data?.currentDateTime);
   return (
     <div>
-      <div className="card card-compact w-96 bg-base-100 shadow-xl">
+      <div className="card card-compact w-full bg-base-100 shadow-xl">
         <figure>
-          <img src={data.img_url} alt="Shoes" />
+          <img src={data.img_url} alt="" className="w-full" />
         </figure>
         <div className="card-body">
           <h2 className="card-title">{data.queryTitle}</h2>

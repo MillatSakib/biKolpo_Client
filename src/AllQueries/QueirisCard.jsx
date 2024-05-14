@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const QueirisCard = ({ data }) => {
+const QueirisCard = ({ data, layout }) => {
   const descirption = data?.boycottingReason?.substring(0, 250) + "  .....";
   function formatDate(dateStringInMilliseconds) {
     const milliseconds = parseInt(dateStringInMilliseconds);
@@ -18,12 +18,19 @@ const QueirisCard = ({ data }) => {
   const formattedDate = formatDate(data?.currentDateTime);
   return (
     <>
-      <div className="card card-compact w-96 bg-base-100 shadow-xl">
-        <figure>
+      <div
+        className={
+          layout === "list"
+            ? "card md:card-side w-full bg-base-100 shadow-xl"
+            : "card card-compact w-full  bg-base-100 shadow-xl"
+        }
+      >
+        <figure className="min-h-[250px] w-full">
           <img src={data?.img_url} alt="Shoes" className="w-full" />
         </figure>
         <div className="card-body">
           <h2 className="card-title">{data?.queryTitle}</h2>
+          <div>Product Name/service: {data?.ProductName}</div>
           <div>Brand: {data?.ProductBrand}</div>
           <p>{descirption}</p>
           <div className="card-actions justify-between items-center">

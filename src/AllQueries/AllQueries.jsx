@@ -3,6 +3,7 @@ import QueirisCard from "./QueirisCard";
 import { IoSearch } from "react-icons/io5";
 
 const AllQueries = () => {
+  const [layout, setLayout] = useState(null);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
@@ -55,10 +56,33 @@ const AllQueries = () => {
           <IoSearch />
         </span>
       </label>
+      <div className="flex justify-center my-10 gap-4">
+        <button
+          type="btn"
+          className="btn btn-outline btn-info"
+          onClick={() => setLayout("list")}
+        >
+          List View
+        </button>
+
+        <button
+          type="btn"
+          className="btn btn-outline btn-success"
+          onClick={() => setLayout("grid")}
+        >
+          Grid View
+        </button>
+      </div>
       <h2 className="text-center text-2xl md:text-3xl lg:text-4xl font-bold">
         All Queries
       </h2>
-      <div className="flex flex-wrap gap-6 w-[95%] md:w-[80%] lg:w-[65%] mx-auto mb-20 justify-center my-10">
+      <div
+        className={
+          layout === "list"
+            ? "grid grid-cols-1 gap-6 w-[95%] md:w-[80%] lg:w-[65%] mx-auto mb-20 justify-center my-10"
+            : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-[95%] md:w-[80%] lg:w-[65%] mx-auto mb-20 justify-center my-10"
+        }
+      >
         {loading ? (
           <span className="loading loading-spinner loading-lg text-success"></span>
         ) : data.length === 0 ? (
@@ -67,7 +91,7 @@ const AllQueries = () => {
           </h3>
         ) : (
           data.map((item, index) => (
-            <QueirisCard data={item} key={index}></QueirisCard>
+            <QueirisCard data={item} key={index} layout={layout}></QueirisCard>
           ))
         )}
       </div>
