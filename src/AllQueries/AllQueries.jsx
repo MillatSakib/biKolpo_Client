@@ -7,7 +7,7 @@ const AllQueries = () => {
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
   useEffect(() => {
-    fetch("https://bikolpo.vercel.app/allQeuries")
+    fetch("https://bikolpo.vercel.app/allQeuries/")
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);
@@ -16,13 +16,21 @@ const AllQueries = () => {
   }, []);
   const handleSearchClick = () => {
     setLoading(true);
-
-    fetch(`https://bikolpo.vercel.app/allQueries/${searchText}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setLoading(false);
-        setData(data);
-      });
+    if (searchText.length) {
+      fetch(`https://bikolpo.vercel.app/allQueries/${searchText}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setLoading(false);
+          setData(data);
+        });
+    } else {
+      fetch("https://bikolpo.vercel.app/allQeuries/")
+        .then((res) => res.json())
+        .then((data) => {
+          setLoading(false);
+          setData(data);
+        });
+    }
   };
 
   return (
@@ -53,9 +61,13 @@ const AllQueries = () => {
       <div className="flex flex-wrap gap-6 w-[95%] md:w-[80%] lg:w-[65%] mx-auto mb-20 justify-center my-10">
         {loading ? (
           <span className="loading loading-spinner loading-lg text-success"></span>
+        ) : data.length === 0 ? (
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-error">
+            No Data Found!!!
+          </h3>
         ) : (
-          data.map((data, index) => (
-            <QueirisCard data={data} key={index}></QueirisCard>
+          data.map((item, index) => (
+            <QueirisCard data={item} key={index}></QueirisCard>
           ))
         )}
       </div>
