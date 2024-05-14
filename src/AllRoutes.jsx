@@ -14,72 +14,124 @@ import AddQueries from "./AddQueries/AddQueries";
 import UpdateQuery from "./UpdateQuery/UpdateQuery";
 import QueryDetails from "./QueryDetails/QueryDetails";
 import axios from "axios";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const AllRoutes = () => {
   const Routes = createBrowserRouter([
     {
       path: "/",
       element: <LayOut></LayOut>,
-      errorElement: <NotFoundPage></NotFoundPage>,
+      errorElement: (
+        <HelmetProvider>
+          <Helmet>
+            <title>biKolpo - 404 Not Found</title>
+          </Helmet>
+          <NotFoundPage></NotFoundPage>
+        </HelmetProvider>
+      ),
       children: [
         {
           path: "/",
-          element: <Home></Home>,
+          element: (
+            <HelmetProvider>
+              <Helmet>
+                <title>biKolpo - Home</title>
+              </Helmet>
+              <Home></Home>
+            </HelmetProvider>
+          ),
         },
         {
           path: "/login",
           element: (
-            <AuthPrivateRoute>
-              <Login></Login>
-            </AuthPrivateRoute>
+            <HelmetProvider>
+              <Helmet>
+                <title>biKolpo - Login</title>
+              </Helmet>
+              <AuthPrivateRoute>
+                <Login></Login>
+              </AuthPrivateRoute>
+            </HelmetProvider>
           ),
         },
         {
           path: "/register",
           element: (
-            <AuthPrivateRoute>
-              <Register></Register>
-            </AuthPrivateRoute>
+            <HelmetProvider>
+              <Helmet>
+                <title>biKolpo - Register</title>
+              </Helmet>
+              <AuthPrivateRoute>
+                <Register></Register>
+              </AuthPrivateRoute>
+            </HelmetProvider>
           ),
         },
 
         {
           path: "/queris",
-          element: <AllQueries></AllQueries>,
+          element: (
+            <HelmetProvider>
+              <Helmet>
+                <title>biKolpo - All Queries</title>
+              </Helmet>
+              <AllQueries></AllQueries>
+            </HelmetProvider>
+          ),
         },
 
         {
           path: "/recomendationsForMe",
           element: (
-            <PrivateRoutes>
-              <RecomendedForMe></RecomendedForMe>
-            </PrivateRoutes>
+            <HelmetProvider>
+              <Helmet>
+                <title>biKolpo - Recomended For Me</title>
+              </Helmet>
+              <PrivateRoutes>
+                <RecomendedForMe></RecomendedForMe>
+              </PrivateRoutes>
+            </HelmetProvider>
           ),
         },
 
         {
           path: "/myQueries",
           element: (
-            <PrivateRoutes>
-              <MyQueries></MyQueries>
-            </PrivateRoutes>
+            <HelmetProvider>
+              <Helmet>
+                <title>biKolpo - My Queries</title>
+              </Helmet>
+              <PrivateRoutes>
+                <MyQueries></MyQueries>
+              </PrivateRoutes>
+            </HelmetProvider>
           ),
         },
 
         {
           path: "/myRecomendation",
           element: (
-            <PrivateRoutes>
-              <MyRecomendetion></MyRecomendetion>
-            </PrivateRoutes>
+            <HelmetProvider>
+              <Helmet>
+                <title>biKolpo - My Recomendation</title>
+              </Helmet>
+              <PrivateRoutes>
+                <MyRecomendetion></MyRecomendetion>
+              </PrivateRoutes>
+            </HelmetProvider>
           ),
         },
         {
           path: "/addQueries",
           element: (
-            <PrivateRoutes>
-              <AddQueries></AddQueries>
-            </PrivateRoutes>
+            <HelmetProvider>
+              <Helmet>
+                <title>biKolpo - Add Query</title>
+              </Helmet>
+              <PrivateRoutes>
+                <AddQueries></AddQueries>
+              </PrivateRoutes>
+            </HelmetProvider>
           ),
         },
         {
@@ -87,9 +139,14 @@ const AllRoutes = () => {
           loader: ({ params }) =>
             fetch(`https://bikolpo.vercel.app/updateQuery/${params.id}`),
           element: (
-            <PrivateRoutes>
-              <UpdateQuery></UpdateQuery>
-            </PrivateRoutes>
+            <HelmetProvider>
+              <Helmet>
+                <title>biKolpo - Update Query</title>
+              </Helmet>
+              <PrivateRoutes>
+                <UpdateQuery></UpdateQuery>
+              </PrivateRoutes>
+            </HelmetProvider>
           ),
         },
         {
@@ -97,9 +154,14 @@ const AllRoutes = () => {
           loader: ({ params }) =>
             axios.post(`https://bikolpo.vercel.app/queryDetails/${params.id}`),
           element: (
-            <PrivateRoutes>
-              <QueryDetails></QueryDetails>
-            </PrivateRoutes>
+            <HelmetProvider>
+              <Helmet>
+                <title>biKolpo - Query Details</title>
+              </Helmet>
+              <PrivateRoutes>
+                <QueryDetails></QueryDetails>
+              </PrivateRoutes>
+            </HelmetProvider>
           ),
         },
       ],
