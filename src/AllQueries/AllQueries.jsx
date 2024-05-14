@@ -84,7 +84,9 @@ const AllQueries = () => {
         }
       >
         {loading ? (
-          <span className="loading loading-spinner loading-lg text-success"></span>
+          <div className="col-span1 md:col-span-2 lg:col-span-3 text-center">
+            <span className="loading loading-spinner loading-lg text-success mx-auto"></span>
+          </div>
         ) : data.length === 0 ? (
           <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-error">
             No Data Found!!!
