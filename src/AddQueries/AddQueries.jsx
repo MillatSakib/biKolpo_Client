@@ -47,7 +47,7 @@ const AddQueries = () => {
   return (
     <div className="text-center mb-28">
       <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold my-10">
-        Add Queries
+        Add Query
       </h2>
       <div className="w-[95%] md:w-[80%] lg:w-[65%] mx-auto">
         <form onSubmit={handlesubmit}>

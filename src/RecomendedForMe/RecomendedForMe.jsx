@@ -4,17 +4,25 @@ import { AuthContext } from "../AuthProvider";
 const RecomendedForMe = () => {
   const [data, setData] = useState([]);
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch(`https://bikolpo.vercel.app/recomendationForMe/${user.email}`)
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
   }, []);
   return (
     <div>
       <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center my-4">
         Recomendation For Me
       </h2>
-      {data.length === 0 ? (
+      {loading ? (
+        <div className="text-center my-20">
+          <span className="loading loading-spinner loading-lg text-success"></span>
+        </div>
+      ) : data.length === 0 ? (
         <div className="text-error font-semibold text-xl md:text-2xl lg:text-3xl text-center my-10">
           You have not get any recomendation yet!!!
         </div>

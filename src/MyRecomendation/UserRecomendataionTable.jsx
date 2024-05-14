@@ -7,14 +7,23 @@ const UserRecomendataionTable = () => {
   const [data, setData] = useState([]);
   const [dependency, setDependency] = useState(true);
   const length = data.length;
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch(`https://bikolpo.vercel.app/myRecomendetion/${user.email}`)
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
   }, [dependency]);
   return (
     <>
-      {length === 0 ? (
+      {loading ? (
+        <div className="text-center my-20">
+          {" "}
+          <span className="loading loading-spinner loading-lg text-success"></span>
+        </div>
+      ) : length === 0 ? (
         <div className="font-bold text-center text-xl md:text-2xl lg:text-3xl text-error">
           You Have not give any recomendation yet!
         </div>

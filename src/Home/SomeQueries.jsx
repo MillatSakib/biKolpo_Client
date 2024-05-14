@@ -3,10 +3,15 @@ import QueirisCard from "./QueirisCard";
 
 const SomeQueries = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch("https://bikolpo.vercel.app/sevenQueries")
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((data) => {
+        setData(data);
+        const temp = loading;
+        setLoading(!temp);
+      });
   }, []);
   return (
     <div className="my-16">
@@ -17,9 +22,13 @@ const SomeQueries = () => {
         Here some Latest Queries for you.
       </p>
       <div className="flex flex-wrap gap-4 justify-center">
-        {data.map((data, index) => (
-          <QueirisCard data={data} key={index}></QueirisCard>
-        ))}
+        {loading ? (
+          <span className="loading loading-spinner loading-lg text-success"></span>
+        ) : (
+          data.map((item, index) => (
+            <QueirisCard data={item} key={index}></QueirisCard>
+          ))
+        )}
       </div>
     </div>
   );
