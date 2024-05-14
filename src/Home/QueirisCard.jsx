@@ -22,6 +22,7 @@ const QueirisCard = ({ data }) => {
         </figure>
         <div className="card-body">
           <h2 className="card-title">{data?.queryTitle}</h2>
+          <div>{data?.ProductName}</div>
           <div>Brand: {data?.ProductBrand}</div>
           <p>{descirption}</p>
           <div className="card-actions justify-between items-center">

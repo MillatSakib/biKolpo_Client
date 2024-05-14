@@ -1,11 +1,22 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthProvider";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useLoaderData } from "react-router-dom";
+import RecomendationHero from "./RecomendationHero";
 
 const QueryDetails = () => {
   const apiData = useLoaderData();
+  const [addcomment, setAddComment] = useState([]);
+  const [recomendationData, setRecomendetionData] = useState([]);
+  useEffect(() => {
+    fetch(`https://bikolpo.vercel.app/allRecomendation/${apiData.data[0]._id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setRecomendetionData(data);
+      });
+  }, [addcomment]);
+
   const queryData = apiData.data[0];
   function formatDate(dateStringInMilliseconds) {
     const milliseconds = parseInt(dateStringInMilliseconds);
@@ -42,7 +53,7 @@ const QueryDetails = () => {
       queryUserName: queryData.name,
       quryUserEmail: queryData.email,
     };
-    // console.log("objectobject");
+
     axios
       .post(
         `https://bikolpo.vercel.app/addRecomendation/${queryData._id}`,
@@ -58,6 +69,8 @@ const QueryDetails = () => {
           autoClose: 5000,
           hideProgressBar: false,
         });
+        const temp = addcomment;
+        setAddComment(!temp);
       })
       .catch((error) => {
         toast.error(error?.response?.statusText, {
@@ -158,6 +171,23 @@ const QueryDetails = () => {
               ></input>
             </div>
           </form>
+        </div>
+
+        <div className="my-20">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl text-success text my-6 font-bold">
+            All Recomendation
+          </h2>
+          {recomendationData.length === 0 ? (
+            <h2 className="text-error font-bold text-xl md:text-2xl text-center">
+              OOOPS!! No recomendation have yet.
+            </h2>
+          ) : (
+            recomendationData.map((data, index) => (
+              <div className="my-4" key={index}>
+                <RecomendationHero data={data}></RecomendationHero>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>
