@@ -12,6 +12,7 @@ import {
 } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { GithubAuthProvider } from "firebase/auth";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -50,6 +51,9 @@ const AuthProvider = ({ children }) => {
   const logInUser = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        axios.post("https://bikolpo.vercel.app/jwt", userCredential, {
+          withCredentials: true,
+        });
         const user = userCredential.user;
         let temp = componentRender;
         setComponentRender(!temp);
@@ -73,6 +77,9 @@ const AuthProvider = ({ children }) => {
   const GoogleSignIn = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
+        axios.post("https://bikolpo.vercel.app/jwt", result, {
+          withCredentials: true,
+        });
         let temp = componentRender;
         setComponentRender(!temp);
         const loginUser = result.user;
@@ -95,6 +102,9 @@ const AuthProvider = ({ children }) => {
   const githubSignIn = () => {
     signInWithPopup(auth, githubProvider)
       .then((result) => {
+        axios.post("https://bikolpo.vercel.app/jwt", result, {
+          withCredentials: true,
+        });
         let temp = componentRender;
         setComponentRender(!temp);
         const credential = GithubAuthProvider.credentialFromResult(result);
@@ -127,6 +137,15 @@ const AuthProvider = ({ children }) => {
       autoClose: 5000,
       hideProgressBar: false,
     });
+    axios.post(
+      "https://bikolpo.vercel.app/logout",
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    // document.cookie =
+    //   "token" + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     return signOut(auth);
   };
 
