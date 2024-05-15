@@ -15,13 +15,13 @@ const SomeQueries = () => {
   }, []);
   return (
     <div className="my-16">
-      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold my-6 text-center">
+      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold my-6 md:my-10 text-center">
         Recent Queries
       </h2>
       <p className="text-center mb-10 text-xl font-semibold">
         Here some Latest Queries for you.
       </p>
-      <div className="flex flex-wrap gap-4 justify-center">
+      <div className="flex flex-wrap gap-8 md:my-12 my-6 justify-center">
         {loading ? (
           <span className="loading loading-spinner loading-lg text-success"></span>
         ) : (

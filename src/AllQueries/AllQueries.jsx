@@ -80,7 +80,7 @@ const AllQueries = () => {
         className={
           layout === "list"
             ? "grid grid-cols-1 gap-6 w-[95%] md:w-[80%] lg:w-[65%] mx-auto mb-20 justify-center my-10"
-            : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-[95%] md:w-[80%] lg:w-[65%] mx-auto mb-20 justify-center my-10"
+            : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-[95%] md:w-[80%] lg:w-[65%] mx-auto mb-20 justify-center my-10"
         }
       >
         {loading ? (
