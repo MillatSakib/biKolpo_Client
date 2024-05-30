@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import LoginNav from "./LoginNav";
 import LogoutNav from "./LogoutNav";
@@ -7,9 +7,11 @@ import viteImg from "../../public/vite.png";
 
 const Nav = () => {
   const { user, setRouteState } = useContext(AuthContext);
+
   const [themeState, setThemeState] = useState(
     localStorage.getItem("darkyTheme") === "true"
   );
+
   function handleChange() {
     const newState = !themeState;
     setThemeState(newState);
